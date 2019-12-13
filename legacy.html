@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Translator</title>
+    
+</head>
+<body>
+    <div class="content">
+        <div class="input">
+            <textarea id="input">
+
+
+            </textarea>
+            <button onclick="translate()">Перевести</button>
+        </div>
+        <div id="output">
+
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script>
+        function translate()
+        {
+            text = document.getElementById("input").value;
+            $.ajax({
+                method: "POST",
+                url: "https://translate.yandex.net/api/v1.5/tr.json/translate",
+                data: { key: "trnsl.1.1.20170416T154027Z.9a862c8ad1ddfa27.6c29920c728276f5d52c2f38b11354fc2de91839", text: text, lang: "en-ru" }
+                })
+                .done(function( msg ) {
+                    //$('.output').innerHTML += msg.text;
+                    document.getElementById('output').innerHTML = msg.text;
+                });
+        }
+
+    </script>
+</body>
+</html>
